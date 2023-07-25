@@ -5,9 +5,16 @@ const asyncMap = (listItem, listItemCallback) => {
     listItemCallback(mappedListItem);
   }, delay);
 };
-const mapList = (list, listCallback, { nrConcurrentCalls, asyncMap } = {}) => {
+
+const defaultAsyncMap = (listItem, listItemCallback) => {
+  const mappedListItem = listItem;
+  listItemCallback(mappedListItem);
+};
+
+const mapList = (list, listCallback, { nrConcurrentCalls = 1, asyncMap = defaultAsyncMap } = {}) => {
   // TODO: Implement this
 };
+
 // Scenario 1
 mapList(
   ["First", "Second", "Third", "Forth", "Fifth"],
