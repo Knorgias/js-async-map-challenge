@@ -12,8 +12,22 @@ const defaultAsyncMap = (listItem, listItemCallback) => {
 };
 
 const mapList = (list, listCallback, { nrConcurrentCalls = 1, asyncMap = defaultAsyncMap } = {}) => {
-  // TODO: Implement this
+  const mappedList = [];
+  let counter = 0;
+
+  const handleItemCallback = (mappedListItem) => {
+    mappedList.push(mappedListItem);
+    counter++;
+    if (counter === list.length) {
+      listCallback(mappedList);
+    }
+  };
+
+  list.forEach((item) => {
+    asyncMap(item, handleItemCallback);
+  });
 };
+
 
 // Scenario 1
 mapList(
